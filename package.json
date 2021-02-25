@@ -8,8 +8,31 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "10.0.7",
+    "@reduxjs/toolkit": "^1.5.0",
+    "axios": "^0.21.1",
+    "axios-auth-refresh": "^3.1.0",
+    "cookie": "^0.4.1",
+    "formik": "^2.2.6",
+    "next": "10.0.5",
+    "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-redux": "^7.2.2",
+    "set-cookie-parser": "^2.4.7",
+    "styled-components": "latest",
+    "twin.macro": "^2.1.1",
+    "yup": "^0.32.8"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.4.0",
+    "@types/node": "^14.14.22",
+    "@types/react-redux": "^7.1.16",
+    "@types/set-cookie-parser": "^2.4.0",
+    "@types/styled-components": "^5.1.7",
+    "autoprefixer": "^10.2.3",
+    "babel-plugin-styled-components": "^1.12.0",
+    "postcss": "^8.2.4",
+    "tailwindcss": "^2.0.2",
+    "typescript": "^4.1.3"
   }
 }
