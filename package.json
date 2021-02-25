@@ -8,7 +8,6 @@
     "start": "next start",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint ./ --ext .js,.ts,.tsx"
-
   },
   "prettier": "@twgdev/prettier-config",
   "dependencies": {
@@ -25,6 +24,7 @@
     "redux-persist": "^6.0.0",
     "set-cookie-parser": "^2.4.7",
     "styled-components": "latest",
+    "styled-jsx": "^3.4.4",
     "twin.macro": "^2.1.1",
     "yup": "^0.32.8"
   },
