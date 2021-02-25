@@ -1,6 +1,7 @@
 import '../styles/styles.css'
 import styled from 'styled-components'
 import tw from 'twin.macro'
+import { Header } from '../components/Header'
 
 export const PageWrapper = styled.main`
   ${tw`text-near-black bg-ice-blue w-full relative`}
@@ -10,7 +11,9 @@ export const PageWrapper = styled.main`
 function MyApp({ Component, pageProps }) {
   return (
     <PageWrapper>
-      <Component {...pageProps} />
+      <Header>
+        <Component {...pageProps} />
+      </Header>
     </PageWrapper>
   )
 }
