@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.setHeader(keyArr[0], keyArr[1] as string)
     )
     res.send(data) // Send data from Node.js server response
-  } catch (error) {
-    throw new Error(error)
+  } catch ({ response: { status, data } }) {
+    res.status(status).json(data)
   }
 }
