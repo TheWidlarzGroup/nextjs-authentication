@@ -3,10 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { headers } = req
+
   try {
-    const { data, headers: returnedHeaders } = await axios.post(
-      'http://localhost:3001/auth/refresh-token', // refresh token Node.js server path
-      undefined,
+    const { data, headers: returnedHeaders } = await axios.delete(
+      'http://localhost:3001/auth/logout',
       {
         headers,
       }
@@ -15,7 +15,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     Object.entries(returnedHeaders).forEach((keyArr) =>
       res.setHeader(keyArr[0], keyArr[1] as string)
     )
-    res.status(200).json(data) // Send response to client
+
+    res.status(200).json(data)
   } catch (error) {
     throw new Error(error)
   }
