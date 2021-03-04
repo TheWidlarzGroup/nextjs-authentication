@@ -8,7 +8,7 @@ export enum AuthStates {
 
 export const fetchUser = createAsyncThunk('auth/me', async (_, thunkAPI) => {
   try {
-    const response = await axios.get<{ name: string; email: string; type: string }>('api/me')
+    const response = await axios.get<{ name?: string; email?: string; type?: string }>('api/me')
 
     return response.data
   } catch (error) {
