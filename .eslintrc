@@ -2,6 +2,9 @@
     "extends": "eslint-config-twg/typescript.js",
     "parserOptions": {
       "project": "./tsconfig.json"
+    },
+    "rules": {
+      "no-shadow": "off"
     }
   }
   
