@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../axios'
 
 export enum FrogStates {
@@ -14,13 +14,6 @@ export const fetchFrogs = createAsyncThunk('auth/frogs', async (_, thunkAPI) => 
     return thunkAPI.rejectWithValue({ error: error.message })
   }
 })
-
-export interface AuthSliceState {
-  accessToken: string
-  loading: string
-  me: Record<string, unknown>
-  error?: SerializedError
-}
 
 const internalInitialState = {
   loading: FrogStates.IDLE,
