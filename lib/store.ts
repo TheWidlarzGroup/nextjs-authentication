@@ -1,4 +1,4 @@
-import { configureStore, combineReducers, Store } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { createWrapper, MakeStore, HYDRATE } from 'next-redux-wrapper'
 import { authSlice } from './slices/auth'
 import { frogsSlice } from './slices/frogs'
@@ -19,11 +19,12 @@ const rootReducer = (state, action) => {
   return combinedReducers(state, action)
 }
 
-export const store: Store = configureStore({
+export const store = configureStore<typeof combineReducers>({
   reducer: rootReducer,
 })
+
 const makeStore: MakeStore = () => store
-
-export type ThunkDispatch = typeof store.dispatch
-
 export const wrapper = createWrapper(makeStore, { storeKey: 'key' })
+
+export type OurStore = ReturnType<typeof store.getState>
+export type ThunkDispatch = typeof store.dispatch
