@@ -109,7 +109,6 @@ export const authSlice = createSlice({
       // throw new Error(action.error.message)
     })
     builder.addCase(fetchUser.fulfilled, (state, action) => {
-      console.log(action.payload)
       state.me = action.payload
     })
   },
