@@ -4,13 +4,13 @@ import { OurStore } from '../lib/store'
 
 type Props = {
   readonly role?: 'admin'
-  readonly customText?: string
+  readonly customText?: React.ReactNode
 }
 
 export const AuthGuard: React.FC<Props> = ({ children, role, customText }) => {
   const { loading, me } = useSelector((state: OurStore) => state.authReducer)
 
-  if (loading) {
+  if (loading === 'loading') {
     return <>loading...</>
   }
 
@@ -25,11 +25,11 @@ export const AuthGuard: React.FC<Props> = ({ children, role, customText }) => {
 
   return (
     <section>
-      <h2>Unauthorized</h2>
-      <p>
+      <h2 className="text-center">Unauthorized</h2>
+      <div className="text-center">
         {customText ||
           "You don't have permission to access this page. Pleae contact an admin if you think something is wrong."}
-      </p>
+      </div>
     </section>
   )
 }

@@ -55,7 +55,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 
 export interface AuthSliceState {
   accessToken: string
-  loading: string
+  loading: AuthStates
   me?: {
     name?: string
     email?: string
