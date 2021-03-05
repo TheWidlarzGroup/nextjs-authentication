@@ -4,7 +4,8 @@
       "project": "./tsconfig.json"
     },
     "rules": {
-      "no-shadow": "off"
+      "no-shadow": "off",
+      "prettier/prettier": ["error", { "endOfLine": "auto" }]
     }
   }
   
