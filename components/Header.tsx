@@ -18,7 +18,7 @@ export const Header: React.FC = ({ children }) => {
           await dispatch(logout())
           router.push('/login')
         }}>
-        Login
+        Logout
       </Button>
       {children}
     </div>
