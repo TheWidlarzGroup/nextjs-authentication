@@ -56,14 +56,17 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 export interface AuthSliceState {
   accessToken: string
   loading: string
-  me: Record<string, unknown>
+  me?: {
+    name?: string
+    email?: string
+  }
   error?: SerializedError
 }
 
 const internalInitialState = {
   accessToken: '',
   loading: AuthStates.IDLE,
-  me: {},
+  me: null,
   error: null,
 }
 
@@ -106,6 +109,7 @@ export const authSlice = createSlice({
       // throw new Error(action.error.message)
     })
     builder.addCase(fetchUser.fulfilled, (state, action) => {
+      console.log(action.payload)
       state.me = action.payload
     })
   },
