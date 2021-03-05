@@ -1,6 +1,8 @@
 import { useRouter } from 'next/dist/client/router'
-import axios from 'axios'
 import Image from 'next/image'
+import { user } from '../lib/authorize'
+import { fetchFrogs } from '../lib/slices/frogs'
+import { ThunkDispatch } from '../lib/store'
 
 type Frog = { id: string; webformatURL: string }
 
@@ -33,12 +35,17 @@ export const Home = ({ frogs }: { frogs: Frog[] }) => {
   )
 }
 
-export const getServerSideProps = async () => {
-  const response = await axios.get(
-    'https://pixabay.com/api/?key=20330556-9d467084be89e92c1e9632c3a&q=frog&image_type=photo'
-  )
+export const getServerSideProps = user({
+  callback: async (_, store) => {
+    const { dispatch }: { dispatch: ThunkDispatch } = store
+    await dispatch(fetchFrogs())
 
-  return { props: { frogs: response.data.hits } }
-}
+    return {
+      props: {
+        frogs: store.getState().frogsReducer.frogs,
+      },
+    }
+  },
+})
 
 export default Home
