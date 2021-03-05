@@ -9,7 +9,7 @@ export enum FrogStates {
 export const fetchFrogs = createAsyncThunk('auth/frogs', async (_, thunkAPI) => {
   try {
     const response = await axios.get<{ hits: any[] }>('api/frogs')
-    return response
+    return response.data
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error.message })
   }
@@ -29,7 +29,7 @@ export const frogsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchFrogs.fulfilled, (state, action) => {
-      state.frogs = [...action.payload.data.hits]
+      state.frogs = [...action.payload.hits]
       state.loading = FrogStates.IDLE
     })
     builder.addCase(fetchFrogs.rejected, (state, action) => {

@@ -103,7 +103,7 @@ export const authSlice = createSlice({
     })
     builder.addCase(fetchUser.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error }
-      throw new Error(action.error.message)
+      // throw new Error(action.error.message)
     })
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.me = action.payload
