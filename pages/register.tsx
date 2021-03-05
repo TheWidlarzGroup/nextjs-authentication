@@ -6,6 +6,9 @@ import { PageWrapper } from './login'
 import Logo from '../components/Logo'
 import FormWithLabel from '../components/FormWithLabel'
 import InputWithError from '../components/InputWithError'
+import { ThunkDispatch } from '../lib/store'
+import { useDispatch } from 'react-redux'
+import { register } from '../lib/slices/auth'
 
 interface Values {
   email: string
@@ -27,11 +30,13 @@ const initialValues: Values = {
 
 const Auth = () => {
   const router = useRouter()
+  const dispatch: ThunkDispatch = useDispatch()
 
   const formik = useFormik({
     validationSchema: loginSchema,
     initialValues,
-    onSubmit: () => {
+    onSubmit: async (values) => {
+      await dispatch(register(values))
       router.push('/')
     },
   })

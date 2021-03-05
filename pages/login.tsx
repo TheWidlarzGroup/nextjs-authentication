@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
 import { useRouter } from 'next/dist/client/router'
 import styled from 'styled-components'
@@ -7,6 +8,8 @@ import tw from 'twin.macro'
 import InputWithError from '../components/InputWithError'
 import FormWithLabel from '../components/FormWithLabel'
 import Logo from '../components/Logo'
+import { ThunkDispatch } from '../lib/store'
+import { login } from '../lib/slices/auth'
 
 interface Values {
   email: string
@@ -29,11 +32,13 @@ export const PageWrapper = styled.div`
 
 const Auth = () => {
   const router = useRouter()
+  const dispatch: ThunkDispatch = useDispatch()
 
   const formik = useFormik({
     validationSchema: loginSchema,
     initialValues,
-    onSubmit: () => {
+    onSubmit: async (values) => {
+      await dispatch(login(values))
       router.push('/')
     },
   })
