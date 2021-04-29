@@ -1,6 +1,8 @@
 import { useRouter } from 'next/dist/client/router'
 import axios from 'axios'
 import Image from 'next/image'
+import React from 'react'
+import Button from '../components/Button'
 
 type Frog = { id: string; webformatURL: string }
 
@@ -9,6 +11,13 @@ export const Home = ({ frogs }: { frogs: Frog[] }) => {
   return (
     <div>
       <div className="flex flex-col items-center">
+        <Button
+          className="mt-10"
+          onClick={() => {
+            router.push('/login')
+          }}>
+          Go to login ↖️
+        </Button>
         <p className="text-72 mb-24">
           {frogs ? (
             'You may pet the phrog 🐸'

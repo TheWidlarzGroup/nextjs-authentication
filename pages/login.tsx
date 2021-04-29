@@ -7,6 +7,7 @@ import tw from 'twin.macro'
 import InputWithError from '../components/InputWithError'
 import FormWithLabel from '../components/FormWithLabel'
 import Logo from '../components/Logo'
+import Button from '../components/Button'
 
 interface Values {
   email: string
@@ -40,6 +41,13 @@ const Auth = () => {
 
   return (
     <PageWrapper>
+      <Button
+        className="mb-10"
+        onClick={() => {
+          router.push('/')
+        }}>
+        Go to phrogs
+      </Button>
       <Logo />
       <FormWithLabel
         onSubmit={formik.handleSubmit}
