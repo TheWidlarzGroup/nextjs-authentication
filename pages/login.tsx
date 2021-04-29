@@ -1,15 +1,16 @@
 import { useFormik } from 'formik'
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
 import { useRouter } from 'next/dist/client/router'
 import styled from 'styled-components'
 import tw from 'twin.macro'
+import { useDispatch } from 'react-redux'
 import InputWithError from '../components/InputWithError'
 import FormWithLabel from '../components/FormWithLabel'
 import Logo from '../components/Logo'
-import { ThunkDispatch } from '../lib/store'
+import { MyThunkDispatch } from '../lib/store'
 import { login } from '../lib/slices/auth'
+import Button from '../components/Button'
 
 interface Values {
   email: string
@@ -32,7 +33,8 @@ export const PageWrapper = styled.div`
 
 const Auth = () => {
   const router = useRouter()
-  const dispatch: ThunkDispatch = useDispatch()
+
+  const dispatch: MyThunkDispatch = useDispatch()
 
   const formik = useFormik({
     validationSchema: loginSchema,
@@ -45,6 +47,13 @@ const Auth = () => {
 
   return (
     <PageWrapper>
+      <Button
+        className="mb-10"
+        onClick={() => {
+          router.push('/')
+        }}>
+        Go to phrogs 🐸
+      </Button>
       <Logo />
       <FormWithLabel
         onSubmit={formik.handleSubmit}

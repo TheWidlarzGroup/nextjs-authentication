@@ -2,12 +2,12 @@ import { useFormik } from 'formik'
 import React from 'react'
 import * as yup from 'yup'
 import { useRouter } from 'next/dist/client/router'
+import { useDispatch } from 'react-redux'
 import { PageWrapper } from './login'
 import Logo from '../components/Logo'
 import FormWithLabel from '../components/FormWithLabel'
 import InputWithError from '../components/InputWithError'
-import { ThunkDispatch } from '../lib/store'
-import { useDispatch } from 'react-redux'
+import { MyThunkDispatch } from '../lib/store'
 import { register } from '../lib/slices/auth'
 
 interface Values {
@@ -30,7 +30,7 @@ const initialValues: Values = {
 
 const Auth = () => {
   const router = useRouter()
-  const dispatch: ThunkDispatch = useDispatch()
+  const dispatch: MyThunkDispatch = useDispatch()
 
   const formik = useFormik({
     validationSchema: loginSchema,

@@ -1,11 +1,13 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/dist/client/router'
 import Image from 'next/image'
-import { user } from '../lib/authorize'
+import { useRouter } from 'next/dist/client/router'
 import { fetchFrogs } from '../lib/slices/frogs'
-import { ThunkDispatch } from '../lib/store'
+import { MyThunkDispatch } from '../lib/store'
+import { user } from '../lib/authorize'
+import Button from '../components/Button'
 
+// Dynamicaly import the AuthGuard component.
 const AuthGuard = dynamic<{ readonly customText: React.ReactNode }>(() =>
   import('../components/AuthGuard').then((mod) => mod.AuthGuard)
 )
@@ -16,6 +18,7 @@ export const Home = ({ frogs }: { frogs: Frog[] }) => {
   const router = useRouter()
   return (
     <AuthGuard
+      // Our custom message to unauthorized users.
       customText={
         <p className="text-72 mb-24">
           <span
@@ -27,6 +30,13 @@ export const Home = ({ frogs }: { frogs: Frog[] }) => {
         </p>
       }>
       <div className="flex flex-col items-center">
+        <Button
+          className="mt-10"
+          onClick={() => {
+            router.push('/login')
+          }}>
+          Go to login ↖️
+        </Button>
         <p className="text-72 mb-24 text-center">You may pet the phrog 🐸</p>
         {frogs?.map((frog, index) => (
           <div key={index} className="mb-4">
@@ -40,7 +50,7 @@ export const Home = ({ frogs }: { frogs: Frog[] }) => {
 
 export const getServerSideProps = user({
   callback: async (_, store) => {
-    const { dispatch }: { dispatch: ThunkDispatch } = store
+    const { dispatch }: { dispatch: MyThunkDispatch } = store
     await dispatch(fetchFrogs())
 
     return {

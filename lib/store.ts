@@ -27,4 +27,4 @@ const makeStore: MakeStore = () => store
 
 export const wrapper = createWrapper(makeStore, { storeKey: 'key' })
 
-export type ThunkDispatch = typeof store.dispatch
+export type MyThunkDispatch = typeof store.dispatch

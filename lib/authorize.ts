@@ -5,7 +5,7 @@ import * as setCookie from 'set-cookie-parser'
 import * as cookie from 'cookie'
 import axios from './axios'
 import { fetchUser, reset, updateAccessToken } from './slices/auth'
-import { OurStore, ThunkDispatch, wrapper } from './store'
+import { OurStore, MyThunkDispatch, wrapper } from './store'
 
 export type ContextWithStore = Omit<
   GetServerSidePropsContext & {
@@ -27,7 +27,7 @@ interface AuthorizeProps {
 
 export const authorize = async ({ context, callback }: AuthorizeProps) => {
   const { store, req, res } = context
-  const { dispatch }: { dispatch: ThunkDispatch } = store // get dispatch action
+  const { dispatch }: { dispatch: MyThunkDispatch } = store // get dispatch action
   const { accessToken } = store.getState().authReducer // get accessToken from memory - redux.
   if (req) {
     // 1. We take cookies (refresh_token) from the client's browser and set it as ours (server-side)
@@ -107,7 +107,7 @@ export const user = ({ callback }: UserProps) =>
   // with our redux store.
   // property "context" contains store
   wrapper.getServerSideProps(async (context: ContextWithStore) => {
-    const { dispatch }: { dispatch: ThunkDispatch } = context.store
+    const { dispatch }: { dispatch: MyThunkDispatch } = context.store
     // 2. Call our authorize Higher order Function
     return authorize({
       context,
